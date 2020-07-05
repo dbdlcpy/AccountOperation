@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/AccountCRUM?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf8&amp;useOldAliasMetadataBehavior=true" />
+         <property name="username" value="root" />
+         <property name="password" value="q461590444" />
+    </bean>
+
+    <bean id="AccountDao" class="DAO.IAccountDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="Account" class="Bean.Account">
+    </bean>
+
+    <bean id="AccountService" class="Service.AccountServiceImpl">
+        <property name="accountDao" ref="AccountDao"></property>
+    </bean>
+
+</beans>
